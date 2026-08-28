@@ -1,1 +1,559 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f7f9fc;
+    color: #172033;
+    line-height: 1.6;
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    width: min(1120px, 92%);
+    margin: auto;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    background: #ffffff;
+    border-bottom: 1px solid #e8ebf0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-content {
+    height: 72px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    color: #14213d;
+    margin-left: -20px;
+}
+
+.logo span {
+    color: #2563eb;
+}
+
+nav {
+    display: flex;
+    gap: 28px;
+}
+
+nav a {
+    color: #4b5563;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: #2563eb;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    position: relative;
+
+    background-image:
+        linear-gradient(
+            rgba(239, 246, 255, 0.80),
+            rgba(255, 255, 255, 0.70)
+        ),
+        url("../images/campus-event.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    padding: 100px 0;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-text {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 7px 14px;
+    background: #dbeafe;
+    color: #2563eb;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(40px, 6vw, 68px);
+    line-height: 1.1;
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    color: #2563eb;
+}
+
+.hero p {
+    max-width: 750px;
+    color: #162335;
+    font-size: 18px;
+    margin: 0 auto 30px;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn {
+    display: inline-block;
+    padding: 13px 23px;
+    border-radius: 8px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+}
+
+.primary-btn {
+    background: #2563eb;
+    color: white;
+}
+
+.primary-btn:hover {
+    background: #1d4ed8;
+}
+
+.secondary-btn {
+    background: white;
+    border: 1px solid #d7dce5;
+    color: #172033;
+}
+
+
+/* =========================
+   SECTION
+========================= */
+
+.section {
+    padding: 30px 0;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-heading span {
+    color: #2563eb;
+    font-weight: 700;
+}
+
+.section-heading h2 {
+    font-size: 36px;
+    margin: 5px 0 10px;
+}
+
+.section-heading p {
+    color: #64748b;
+}
+
+
+/* =========================
+   EVENT CARD
+========================= */
+
+.event-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(280px, 1fr));
+
+    gap: 25px;
+}
+
+.event-card {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #e7eaf0;
+    transition: 0.3s;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+}
+
+.event-image {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+}
+
+.event-content {
+    padding: 20px;
+}
+
+.event-category {
+    display: inline-block;
+    background: #eff6ff;
+    color: #2563eb;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.event-content h3 {
+    margin-bottom: 12px;
+    font-size: 21px;
+}
+
+.event-info {
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.event-content .btn {
+    margin-top: 15px;
+    width: 100%;
+    text-align: center;
+}
+
+
+/* =========================
+   CATEGORIES
+========================= */
+
+.categories-section {
+    background: #ffffff;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(210px, 1fr));
+
+    gap: 20px;
+}
+
+.category-card {
+    text-align: center;
+    padding: 30px 20px;
+    border: 1px solid #e7eaf0;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.category-card:hover {
+    border-color: #2563eb;
+    transform: translateY(-4px);
+}
+
+.category-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.category-card p {
+    color: #64748b;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    background: #ffffff;
+    color: #000308;
+    padding: 30px 0;
+    text-align: center;
+    border-top: 1px solid #e5e7eb;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+
+    .nav-content {
+        height: auto;
+        padding: 18px 0;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero {
+        padding: 70px 0;
+    }
+
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    .section {
+        padding: 55px 0;
+    }
+
+}
+
+
+.filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 35px;
+}
+
+.filters input,
+.filters select {
+    padding: 13px 15px;
+    border: 1px solid #d8dde6;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+}
+
+.filters input {
+    flex: 1;
+}
+
+.filters input:focus,
+.filters select:focus {
+    border-color: #2563eb;
+}
+
+@media (max-width: 600px) {
+
+    .filters {
+        flex-direction: column;
+    }
+
+}
+
+.event-details {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+}
+
+.details-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.details-content {
+    padding: 40px;
+}
+
+.details-content h1 {
+    font-size: 40px;
+    margin: 10px 0 20px;
+}
+
+.details-content > p {
+    color: #64748b;
+    margin-bottom: 25px;
+}
+
+.details-info {
+    margin-bottom: 30px;
+}
+
+.details-info p {
+    margin-bottom: 8px;
+}
+
+@media (max-width: 600px) {
+
+    .details-image {
+        height: 250px;
+    }
+
+    .details-content {
+        padding: 25px;
+    }
+
+    .details-content h1 {
+        font-size: 30px;
+    }
+
+}
+
+.form-wrapper {
+    max-width: 650px;
+    margin: auto;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    border: 1px solid #e5e7eb;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d8dde6;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+.form-group small {
+    display: block;
+    color: #dc2626;
+    margin-top: 5px;
+}
+
+.success-message {
+    margin-top: 20px;
+    color: #15803d;
+    font-weight: 700;
+}
+
+
+
+.registration-list {
+    display: grid;
+    gap: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.registration-card {
+    background: white;
+    padding: 25px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+}
+
+.registration-card h2 {
+    margin-bottom: 15px;
+    color: #2563eb;
+}
+
+.registration-card p {
+    margin-bottom: 6px;
+    color: #64748b;
+}
+
+.empty-state {
+    text-align: center;
+    background: white;
+    padding: 50px 20px;
+    border-radius: 12px;
+}
+
+/* =========================
+   Registration Actions
+========================= */
+
+.registration-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+
+.download-btn,
+.cancel-btn {
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+
+/* Download PDF */
+
+.download-btn {
+    background: #2563eb;
+    color: white;
+    border: 1px solid #2563eb;
+}
+
+
+.download-btn:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+
+/* Cancel Registration */
+
+.cancel-btn {
+    background: #ffffff;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+
+.cancel-btn:hover {
+    background: #fee2e2;
+}
