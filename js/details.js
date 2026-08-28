@@ -1,78 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
+const eventDetails =
+    document.getElementById("eventDetails");
 
-<head>
 
-    <meta charset="UTF-8">
+const params =
+    new URLSearchParams(window.location.search);
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
 
-    <title>Event Details | Campus Event Hub</title>
+const eventId =
+    Number(params.get("id"));
 
-    <link
-        rel="stylesheet"
-        href="css/style.css"
-    >
 
-</head>
+const event =
+    events.find(event => event.id === eventId);
 
-<body>
 
-<header class="navbar">
+if (!event) {
 
-    <div class="container nav-content">
-
-        <a href="index.html" class="logo">
-            Campus <span>Hub</span>
+    eventDetails.innerHTML = `
+        <h2>Event not found.</h2>
+        <a href="events.html"
+           class="btn primary-btn">
+            Back to Events
         </a>
+    `;
 
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="events.html">Events</a>
-            <a href="my-registration.html">
-                My Registration
-            </a>
-        </nav>
+} else {
 
-    </div>
+    eventDetails.innerHTML = `
 
-</header>
+        <div class="event-details">
 
+            <img
+                src="${event.image}"
+                alt="${event.title}"
+                class="details-image"
+            >
 
-<main>
+            <div class="details-content">
 
-<section class="section">
+                <span class="event-category">
+                    ${event.category}
+                </span>
 
-<div class="container">
+                <h1>
+                    ${event.title}
+                </h1>
 
-    <div id="eventDetails"></div>
+                <p>
+                    ${event.description}
+                </p>
 
-</div>
+                <div class="details-info">
 
-</section>
+                    <p>
+                        📅 <strong>Date:</strong>
+                        ${event.date}
+                    </p>
 
-</main>
+                    <p>
+                        🕐 <strong>Time:</strong>
+                        ${event.time}
+                    </p>
 
+                    <p>
+                        📍 <strong>Location:</strong>
+                        ${event.location}
+                    </p>
 
-<footer class="footer">
+                    <p>
+                        👥 <strong>Organizer:</strong>
+                        ${event.organizer}
+                    </p>
 
-    <div class="container">
+                    <p>
+                        🎟️ <strong>Maximum Seats:</strong>
+                        ${event.seats}
+                    </p>
 
-        <p>
-            © 2026 Campus Event Hub.
-        </p>
+                </div>
 
-    </div>
+                <a
+                    href="registration.html?id=${event.id}"
+                    class="btn primary-btn"
+                >
+                    Register Now
+                </a>
 
-</footer>
+            </div>
 
+        </div>
 
-<script src="js/data.js"></script>
-<script src="js/details.js"></script>
+    `;
 
-</body>
-
-</html>
+}
