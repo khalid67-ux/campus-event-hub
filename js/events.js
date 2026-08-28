@@ -1,131 +1,178 @@
-<!DOCTYPE html>
-<html lang="en">
+const eventsContainer =
+    document.getElementById("eventsContainer");
 
-<head>
+const searchInput =
+    document.getElementById("searchInput");
 
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Events | Campus Event Hub</title>
-
-    <link
-        rel="stylesheet"
-        href="css/style.css"
-    >
-
-</head>
-
-<body>
-
-<header class="navbar">
-
-    <div class="container nav-content">
-
-        <a href="index.html" class="logo">
-            Campus <span>Hub</span>
-        </a>
-
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="events.html">Events</a>
-            <a href="my-registration.html">
-                My Registration
-            </a>
-        </nav>
-
-    </div>
-
-</header>
+const categoryFilter =
+    document.getElementById("categoryFilter");
 
 
-<main>
+// ==============================
+// Create Event Card
+// ==============================
 
-<section class="section">
+function createEventCard(event) {
 
-<div class="container">
+    return `
+        <div class="event-card">
 
-    <div class="section-heading">
+           <img 
+    src="${event.image}?auto=format&fit=crop&w=800&q=70"
+    alt="${event.title}"
+    class="event-image"
+    loading="lazy"
+>
 
-        <span>Upcoming</span>
+            <div class="event-card-content">
 
-        <h1>All Campus Events</h1>
+                <span class="event-category">
+                    ${event.category}
+                </span>
 
-        <p>
-            Find an event that interests you.
-        </p>
+                <h3>${event.title}</h3>
 
-    </div>
+                <p>
+                    ${event.description}
+                </p>
 
+                <div class="event-info">
+                    <p>📅 ${event.date}</p>
+                    <p>⏰ ${event.time}</p>
+                    <p>📍 ${event.location}</p>
+                    <p>👥 ${event.seats} seats</p>
+                </div>
 
-    <!-- Search & Filter -->
+                <a 
+                    href="details.html?id=${event.id}"
+                    class="btn btn-primary"
+                >
+                    View Details
+                </a>
 
-    <div class="filters">
+            </div>
 
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="Search event..."
-        >
-
-        <select id="categoryFilter">
-
-            <option value="All">
-                All Categories
-            </option>
-
-            <option value="Workshop">
-                Workshop
-            </option>
-
-            <option value="Seminar">
-                Seminar
-            </option>
-
-            <option value="Competition">
-                Competition
-            </option>
-
-            <option value="Club Event">
-                Club Event
-            </option>
-
-        </select>
-
-    </div>
+        </div>
+    `;
+}
 
 
-    <div
-        id="eventsContainer"
-        class="event-grid"
-    ></div>
+// ==============================
+// Display Events
+// ==============================
 
-</div>
+function displayEvents(eventList) {
 
-</section>
+    if (eventList.length === 0) {
 
-</main>
+        eventsContainer.innerHTML = `
+            <div class="no-events">
+                <h3>No events found.</h3>
+                <p>
+                    Try another search or category.
+                </p>
+            </div>
+        `;
 
-
-<footer class="footer">
-
-    <div class="container">
-
-        <p>
-            © 2026 Campus Event Hub.
-        </p>
-
-    </div>
-
-</footer>
+        return;
+    }
 
 
-<script src="js/data.js"></script>
-<script src="js/events.js"></script>
+    eventsContainer.innerHTML =
+        eventList
+            .map(createEventCard)
+            .join("");
+}
 
-</body>
 
-</html>
+// ==============================
+// Search + Category Filter
+// ==============================
+
+function filterEvents() {
+
+    const searchText =
+        searchInput.value
+            .toLowerCase()
+            .trim();
+
+    const selectedCategory =
+        categoryFilter.value;
+
+
+    const filteredEvents =
+        events.filter(event => {
+
+            // Search title, description and organizer
+            const searchableText = `
+                ${event.title}
+                ${event.description}
+                ${event.organizer}
+            `.toLowerCase();
+
+
+            const matchesSearch =
+                searchableText.includes(searchText);
+
+
+            const matchesCategory =
+                selectedCategory === "All" ||
+                selectedCategory === "All Categories" ||
+                event.category === selectedCategory;
+
+
+            return (
+                matchesSearch &&
+                matchesCategory
+            );
+
+        });
+
+
+    displayEvents(filteredEvents);
+}
+
+
+// ==============================
+// Search Event
+// ==============================
+
+searchInput.addEventListener(
+    "input",
+    filterEvents
+);
+
+
+// ==============================
+// Category Filter
+// ==============================
+
+categoryFilter.addEventListener(
+    "change",
+    filterEvents
+);
+
+
+// ==============================
+// URL Category
+// ==============================
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const urlCategory =
+    params.get("category");
+
+
+if (urlCategory) {
+    categoryFilter.value = urlCategory;
+}
+
+
+// ==============================
+// Show Events Initially
+// ==============================
+
+filterEvents();
